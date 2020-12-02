@@ -1,18 +1,19 @@
 (ns adventofcode-2020.exercises.day-1.part-1)
 
-(defn make-pairs
-  [inputs]
-  (for [x (range (count inputs)) 
-        y (range (count inputs)) 
-        :when (> y x)
-        :let [a (nth inputs x)
-              b (nth inputs y)]]
-      [(Integer/parseInt a) (Integer/parseInt b)]))
+(defn find-pair
+  [inputs target]
+  (loop [numbers inputs
+         hs #{}]
+    (if (empty? numbers)
+      nil
+      (let [number (Integer/parseInt  (first numbers))
+            pair (- target number)]
+        (if (contains? hs number)
+          (* number pair)
+          (recur 
+            (drop 1 numbers)
+            (conj hs pair)))))))
 
 (defn run
   [inputs]
-  (loop [pairs (make-pairs inputs)]
-    (let [[a b] (first pairs)]
-      (if (= 2020 (+ a b))
-        (* a b)
-        (recur (drop 1 pairs))))))
+  (find-pair inputs 2020))
