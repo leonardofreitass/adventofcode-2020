@@ -6,7 +6,7 @@
          hs #{}]
     (if (empty? numbers)
       nil
-      (let [number (Integer/parseInt  (first numbers))
+      (let [number (Integer/parseInt (first numbers))
             pair (- target number)]
         (if (contains? hs number)
           (* number pair)
