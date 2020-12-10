@@ -17,5 +17,5 @@
   (require (exercise-to-ns exercise part))
   (let [exercise-ns (find-ns (exercise-to-ns exercise part))]
     (with-open [input-file (clojure.java.io/reader (exercise-to-input-file exercise))]
-      (println "Solution:")
-      (println ((ns-resolve exercise-ns 'run) (line-seq input-file))))))
+      (let [solution (time ((ns-resolve exercise-ns 'run) (line-seq input-file)))]
+        (println "Solution" solution)))))
