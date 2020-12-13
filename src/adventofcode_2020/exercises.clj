@@ -13,7 +13,7 @@
 (defn execute 
   "Handler for executing exercises"
   [exercise part]
-  (println "Executing exercise from day" exercise)
+  (println "Executing exercise from day" exercise "part" part)
   (require (exercise-to-ns exercise part))
   (let [exercise-ns (find-ns (exercise-to-ns exercise part))]
     (with-open [input-file (clojure.java.io/reader (exercise-to-input-file exercise))]
